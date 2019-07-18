@@ -8,5 +8,6 @@ Please follow next steps:
 3) Open command line console in timetable-service folder and run command "mvn spring-boot:run"
 4) Open command line console in search-route-service folder and run command "mvn spring-boot:run"
 
-Then open a browser and navigate to http://localhost:8082/swagger-ui.html .
+Then open a browser and navigate to http://localhost:8081/swagger-ui.html (route data information) 
+and http://localhost:8082/swagger-ui.html (route finder) .
 Enjoy.
