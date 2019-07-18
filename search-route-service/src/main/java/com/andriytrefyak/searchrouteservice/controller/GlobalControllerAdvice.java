@@ -33,13 +33,13 @@ public class GlobalControllerAdvice {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<String> handleMissingParameterException(final MissingServletRequestParameterException exc) {
         LOGGER.warn("Missing requested parameter error", exc);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exc.getMessage()+ ". " + ErrorCodeEnum.getErrorMessage(HttpStatus.BAD_REQUEST.value()));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exc.getMessage() + ". " + ErrorCodeEnum.getErrorMessage(HttpStatus.BAD_REQUEST.value()));
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<String> handledArgumentException(final MethodArgumentTypeMismatchException exc) {
         LOGGER.warn("Type parameter error", exc);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exc.getMessage()+ ". " + ErrorCodeEnum.getErrorMessage(HttpStatus.BAD_REQUEST.value()));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exc.getMessage() + ". " + ErrorCodeEnum.getErrorMessage(HttpStatus.BAD_REQUEST.value()));
     }
 
     @ExceptionHandler(Exception.class)
@@ -51,7 +51,7 @@ public class GlobalControllerAdvice {
     @ExceptionHandler
     public ResponseEntity<String> handleValidationException(final ValidationException exc) {
         LOGGER.error("Invalid parameters", exc);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exc.getMessage()+ ". " + ErrorCodeEnum.getErrorMessage(HttpStatus.BAD_REQUEST.value()));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exc.getMessage() + ". " + ErrorCodeEnum.getErrorMessage(HttpStatus.BAD_REQUEST.value()));
     }
 
 }

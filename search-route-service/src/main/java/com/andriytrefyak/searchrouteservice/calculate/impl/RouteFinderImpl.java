@@ -33,7 +33,7 @@ public class RouteFinderImpl implements RouteFinder {
         prepareVortexData(simpleDirectedWeightedGraph);
         final Map<DefaultWeightedEdge, RouteDto> connectionRoutesMap = buildConnectionRoutesMap(simpleDirectedWeightedGraph);
         final List<DefaultWeightedEdge> defaultWeightedEdges = DijkstraShortestPath.findPathBetween(simpleDirectedWeightedGraph, getCityId(departureCityName), getCityId(arrivalCityName));
-        if(defaultWeightedEdges.isEmpty()) {
+        if (defaultWeightedEdges.isEmpty()) {
             throw new RouteNotFoundException(String.format("There is no any route from %s to %s", departureCityName, arrivalCityName));
         }
         return defaultWeightedEdges.stream().map(connectionRoutesMap::get).collect(Collectors.toList());

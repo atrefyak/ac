@@ -15,8 +15,8 @@ public enum ErrorCodeEnum {
     }
 
     public static String getErrorMessage(final int status) {
-        for(ErrorCodeEnum errorCode : ErrorCodeEnum.values()) {
-            if(errorCode.status == status) {
+        for (ErrorCodeEnum errorCode : ErrorCodeEnum.values()) {
+            if (errorCode.status == status) {
                 return errorCode.message;
             }
         }

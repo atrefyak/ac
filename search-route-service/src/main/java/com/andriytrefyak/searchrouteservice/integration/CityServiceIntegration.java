@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient("http://timetable-service")
+@FeignClient("gateway-service/timetable-service")
 public interface CityServiceIntegration {
 
     @GetMapping(value = "/cities")
@@ -16,6 +16,6 @@ public interface CityServiceIntegration {
     @GetMapping(value = "/cities/{id}")
     CityDto getCityById(@RequestParam("id") final Long id);
 
-    @GetMapping(value = "/cities")
+    @GetMapping(value = "/cities/")
     CityDto getCityByName(@RequestParam("name") final String name);
 }

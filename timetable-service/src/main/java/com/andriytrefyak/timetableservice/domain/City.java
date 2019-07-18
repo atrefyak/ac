@@ -12,7 +12,7 @@ public class City {
     @Id
     @GeneratedValue
     private Long id;
-    @Column(name ="name", nullable = false)
+    @Column(name = "name", nullable = false)
     String name;
 
     @OneToMany(mappedBy = "departureCity")

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class RouteServiceImpl  implements RouteService {
+public class RouteServiceImpl implements RouteService {
 
     @Autowired
     private RouteRepository routeRepository;
@@ -30,7 +30,7 @@ public class RouteServiceImpl  implements RouteService {
     @Override
     public List<RouteDto> findByDepartureCityName(final String departureCityName) {
         final City city = cityRepository.findByName(departureCityName).orElseThrow(() ->
-            new RequestedDataNotFoundException(String.format("City with name %s is not found", departureCityName)));
+                new RequestedDataNotFoundException(String.format("City with name %s is not found", departureCityName)));
         return routeRepository.findByDepartureCity(city).stream().map(RouteMapper.INSTANCE::toRouteDTO).collect(Collectors.toList());
     }
 
