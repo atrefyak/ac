@@ -1,9 +1,9 @@
-package com.andriytrefyak.searchrouteservice.calculate.impl;
+package com.andriytrefyak.searchrouteservice.finder.impl;
 
-import com.andriytrefyak.searchrouteservice.calculate.RouteFinder;
 import com.andriytrefyak.searchrouteservice.dto.CityDto;
 import com.andriytrefyak.searchrouteservice.dto.RouteDto;
 import com.andriytrefyak.searchrouteservice.exception.RouteNotFoundException;
+import com.andriytrefyak.searchrouteservice.finder.RouteFinder;
 import com.andriytrefyak.searchrouteservice.integration.CityServiceIntegration;
 import com.andriytrefyak.searchrouteservice.integration.RouteServiceIntegration;
 import org.jgrapht.alg.DijkstraShortestPath;
@@ -11,6 +11,7 @@ import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -31,9 +32,9 @@ public class RouteFinderImpl implements RouteFinder {
     public List<RouteDto> findShortestRouteIncludingConnections(final String departureCityName, final String arrivalCityName) {
         final SimpleDirectedWeightedGraph<Long, DefaultWeightedEdge> simpleDirectedWeightedGraph = new SimpleDirectedWeightedGraph<>(DefaultWeightedEdge.class);
         prepareVortexData(simpleDirectedWeightedGraph);
-        final Map<DefaultWeightedEdge, RouteDto> connectionRoutesMap = buildConnectionRoutesMap(simpleDirectedWeightedGraph);
+        final Map<DefaultWeightedEdge, RouteDto> connectionRoutesMap = buildEdgeMap(simpleDirectedWeightedGraph);
         final List<DefaultWeightedEdge> defaultWeightedEdges = DijkstraShortestPath.findPathBetween(simpleDirectedWeightedGraph, getCityId(departureCityName), getCityId(arrivalCityName));
-        if (defaultWeightedEdges.isEmpty()) {
+        if (CollectionUtils.isEmpty(defaultWeightedEdges)) {
             throw new RouteNotFoundException(String.format("There is no any route from %s to %s", departureCityName, arrivalCityName));
         }
         return defaultWeightedEdges.stream().map(connectionRoutesMap::get).collect(Collectors.toList());
@@ -49,7 +50,7 @@ public class RouteFinderImpl implements RouteFinder {
                         -> new RouteNotFoundException(String.format("There is no direct route from %s to %s", departureCityName, arrivalCityName)));
     }
 
-    private Map<DefaultWeightedEdge, RouteDto> buildConnectionRoutesMap(final SimpleDirectedWeightedGraph<Long, DefaultWeightedEdge> simpleDirectedWeightedGraph) {
+    private Map<DefaultWeightedEdge, RouteDto> buildEdgeMap(final SimpleDirectedWeightedGraph<Long, DefaultWeightedEdge> simpleDirectedWeightedGraph) {
         final List<RouteDto> routeDtos = routeServiceIntegration.getAllRoutes();
         final Map<DefaultWeightedEdge, RouteDto> map = new HashMap<>();
         routeDtos.forEach(routeDto -> {

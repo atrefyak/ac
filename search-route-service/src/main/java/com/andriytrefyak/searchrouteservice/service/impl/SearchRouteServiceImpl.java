@@ -1,6 +1,6 @@
 package com.andriytrefyak.searchrouteservice.service.impl;
 
-import com.andriytrefyak.searchrouteservice.calculate.RouteFinder;
+import com.andriytrefyak.searchrouteservice.finder.RouteFinder;
 import com.andriytrefyak.searchrouteservice.dto.RouteDto;
 import com.andriytrefyak.searchrouteservice.service.SearchRouteService;
 import org.springframework.beans.factory.annotation.Autowired;

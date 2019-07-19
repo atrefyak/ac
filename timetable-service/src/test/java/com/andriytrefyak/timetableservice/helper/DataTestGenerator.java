@@ -8,12 +8,11 @@ import java.time.LocalTime;
 public class DataTestGenerator {
 
     private static final Long ID = 1L;
-    private static final String NAME = "name";
 
     public static City generateCity(final Long ID, final String name) {
         final City city = new City();
         city.setId(ID);
-        city.setName(NAME);
+        city.setName(name);
         return city;
     }
 

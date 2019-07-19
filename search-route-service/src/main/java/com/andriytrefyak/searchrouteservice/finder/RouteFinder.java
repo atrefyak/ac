@@ -1,4 +1,4 @@
-package com.andriytrefyak.searchrouteservice.calculate;
+package com.andriytrefyak.searchrouteservice.finder;
 
 import com.andriytrefyak.searchrouteservice.dto.RouteDto;
 
