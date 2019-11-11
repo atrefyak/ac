@@ -1,4 +1,4 @@
-# adidas-challenge
+# ac
 
 There is a small instruction how to run the project here.
 
